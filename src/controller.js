@@ -28,7 +28,8 @@ const pairs =
     [7, 5],
     [7, 7],
     [7, 11],
-    [7, 12]
+    [7, 12],
+    [8, 9]
 ];
 
 class Controller
