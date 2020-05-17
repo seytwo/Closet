@@ -1,5 +1,5 @@
 const topsNumber = 8;
-const bottomsNumber = 12;
+const bottomsNumber = 13;
 
 const pairs =
 [
@@ -29,7 +29,8 @@ const pairs =
     [7, 7],
     [7, 11],
     [7, 12],
-    [8, 9]
+    [8, 9],
+    [8, 13]
 ];
 
 class Controller
