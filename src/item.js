@@ -32,37 +32,33 @@ class Item extends Box
 
             console.log(_this.typeid + ".onclick.select");
 
-            // 選択済みのアイテムの設定を戻す
-            if (selectedItem != null)
+            for (const typeid in items)
             {
-                selectedItem.div.style.outline = "solid 1px";
-                selectedItem.div.style.outlineColor = "black";
-                for (const pair of selectedItem.pairs)
-                {
-                    pair.div.style.outline = "solid 1px";
-                    pair.div.style.outlineColor = "black";
-                }
+                items[typeid].div.style.opacity = 0.2;
             }
 
             // 選択済みのアイテムを選択した場合は処理なし
             if (selectedItem == _this)
             {
                 selectedItem = null;
+                
+                for (const typeid in items)
+                {
+                    items[typeid].div.style.opacity = 1;
+                }
+
                 return;
             }
 
             // 選択済みのアイテムを更新
             selectedItem = _this;
 
-            // 選択したアイテムの枠を赤くする
-            _this.div.style.outline = "solid 10px";
-            _this.div.style.outlineColor = "red";
-
+            selectedItem.div.style.opacity = 1;
+            
             // ペアのアイテムの枠を青くする
             for (const pair of _this.pairs)
             {
-                pair.div.style.outline = "solid 10px";
-                pair.div.style.outlineColor = "blue";
+                pair.div.style.opacity = 1;
             }
         });
 
@@ -84,9 +80,7 @@ class Item extends Box
                 selectedItem.pairs.add(_this);
                 _this.pairs.add(selectedItem);
                 
-                // ペアの枠線を青色にする
-                _this.div.style.outline = "solid 10px";
-                _this.div.style.outlineColor = "blue";
+                _this.div.style.opacity = 1;
             }
             else
             {
@@ -97,9 +91,7 @@ class Item extends Box
                     selectedItem.pairs.delete(_this);
                     _this.pairs.delete(selectedItem);
                     
-                    // ペアの枠線を戻す
-                    _this.div.style.outline = "solid 1px";
-                    _this.div.style.outlineColor = "black";
+                    _this.div.style.opacity = 0.2;
                 }
             }
             
