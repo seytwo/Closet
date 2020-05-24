@@ -18,6 +18,32 @@ class Item extends Box
         this.img.style.height = parseInt(this.div.style.height);
         this.div.appendChild(this.img);
 
+        this.removeButton = document.createElement("input");
+        this.removeButton.type = "button";
+        this.removeButton.value = "×";
+        this.removeButton.style.position = "relative";
+        this.removeButton.style.top = -parseInt(this.div.style.height) + "px";
+        this.div.appendChild(this.removeButton);
+
+        this.removeButton.addEventListener("click", (event) =>
+        {
+            console.log(_this.typeid + ".removebutton.click");
+            if (window.confirm("アイテムを削除しますか？"))
+            {
+                localStorage.removeItem(_this.typeid + ".img"); 
+                localStorage.removeItem(_this.typeid + ".pairs");
+                // localStorage[_this.type + ".length"] 
+                //     = parseInt(localStorage[_this.type + ".length"]) - 1;
+                for (const pair of _this.pairs)
+                {
+                    pair.pairs.delete(_this);
+                    localStorage[pair.typeid + ".pairs"] 
+                        = JSON.stringify(Array.from(pair.pairs).map((_pair) => _pair.typeid));
+                }
+                window.confirm("ページを更新してください");
+            }
+        });
+
         // ペア
         this.pairs = new Set();
 
@@ -100,7 +126,6 @@ class Item extends Box
                 = JSON.stringify(Array.from(selectedItem.pairs).map((pair) => pair.typeid));
             localStorage[_this.typeid + ".pairs"] 
                 = JSON.stringify(Array.from(_this.pairs).map((pair) => pair.typeid));
-
         });
     }
 

@@ -45,18 +45,21 @@ class AddBox extends Box
             localStorage[item.typeid + ".pairs"] 
                 = JSON.stringify(Array.from(item.pairs).map((pair) => pair.typeid));
 
+            localStorage[_this.type + ".length"] = parseInt(localStorage[_this.type + ".length"]) + 1;
+
             // img読み込み後にローカルストレージに保存
             item.img.addEventListener("load", (event) =>
             {
                 var canvas = document.createElement("canvas");
                 canvas.width  = item.img.width;
                 canvas.height = item.img.height;
+
                 var ctx = canvas.getContext("2d");
                 ctx.drawImage(item.img, 0, 0, item.img.width, item.img.height);
+
                 const data = canvas.toDataURL("image/jpeg");
 
-                localStorage[_this.type + "[" + localStorage[_this.type + ".length"] + "].img"] = data;
-                localStorage[_this.type + ".length"] = parseInt(localStorage[_this.type + ".length"]) + 1;
+                localStorage[item.typeid + ".img"] = data;
             });
         });
         

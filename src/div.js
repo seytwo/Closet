@@ -19,19 +19,17 @@ class Div
         this.div.appendChild(this.addBox.div);
         
         // ローカルストレージから読み込み
-        let i = 0;
-        let typeid = this.type + "[" + i + "]";
-        let src = localStorage[typeid + ".img"]
-        while (src != undefined)
+        const length = localStorage[this.type + ".length"];
+        for (let i = 0; i < length; i++)
         {
-            const item = new Item(i, this.type, src);
-            this.div.appendChild(item.div);
-
-            items[item.typeid] = item;
-
-            i = i + 1;
-            typeid = this.type + "[" + i + "]";
-            src = localStorage[typeid + ".img"];
+            let typeid = this.type + "[" + i + "]";
+            let src = localStorage[typeid + ".img"]
+            if (src != undefined)
+            {
+                const item = new Item(i, this.type, src);
+                this.div.appendChild(item.div);
+                items[item.typeid] = item;
+            }
         }
     }
 }
