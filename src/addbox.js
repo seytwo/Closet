@@ -32,7 +32,7 @@ class AddBox extends Box
         {
             console.log("AddBox.onchange");
 
-            const i = localStorage[_this.type + "Number"];
+            const i = localStorage[_this.type + ".length"];
 
             // アイテムを生成
             const src = window.URL.createObjectURL(_this.file.files[0]);
@@ -55,8 +55,8 @@ class AddBox extends Box
                 ctx.drawImage(item.img, 0, 0, item.img.width, item.img.height);
                 const data = canvas.toDataURL("image/jpeg");
 
-                localStorage[_this.type + "[" + localStorage[_this.type + "Number"] + "].img"] = data;
-                localStorage[_this.type + "Number"] = parseInt(localStorage[_this.type + "Number"]) + 1;
+                localStorage[_this.type + "[" + localStorage[_this.type + ".length"] + "].img"] = data;
+                localStorage[_this.type + ".length"] = parseInt(localStorage[_this.type + ".length"]) + 1;
             });
         });
         
