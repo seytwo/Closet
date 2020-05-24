@@ -2,7 +2,7 @@ const items = {};
 const load = () =>
 {
     //ローカルストレージを初期化
-    if (localStorage.topNumber == null)
+    if (localStorage["top.length"] == null)
     {
         console.log("initialize local strage");
         localStorage["top.length"] = 0;
